@@ -3,15 +3,32 @@ html, body {
     height: 100%;
     padding: 0;
     margin: 0;
+    background-color: #222;
+}
+button {
+    padding: 10px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+    background-color: #444;
+    border: 5px solid #666;
+}
+button:not(:hover) {
+    background-color: #555;
+    border: 5px solid #777;
 }
 #map {
     /* configure the size of the map */
     width: 100%;
     height: calc(100% - 37px);
 }
-
+* {
+    color: #eee;
+}
 h1 {
     font-family: 'Times New Roman', serif;
-    color: black;
     text-align: center;
+}
+@keyframes spin {
+    from { rotate: 0deg; }
+    to { rotate: 360deg; }
 }
