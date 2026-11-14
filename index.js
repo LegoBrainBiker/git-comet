@@ -31,11 +31,15 @@ function initMap(lat, lon, zoom) {
         document.getElementById('map').remove();
         document.getElementById('locationHeading').remove();
         document.getElementById('confirmLocationButton').remove();
-        prosessLocation(latlng.lat, latlng.lng);
+        processLocation(latlng.lat, latlng.lng);
+
     });
 }
 function initDefaultMap() {
     initMap(38.75, -76.29, 2);
+}
+function processLocation(lat, lon) {
+    document.getElementById('coordinates').innerText = `Latitude: ${lat}, Longitude: ${lon}`;
 }
 if (navigator.geolocation) {
     navigator.geolocation.getCurrentPosition(function(position) {
