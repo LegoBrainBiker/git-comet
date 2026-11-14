@@ -1,0 +1,41 @@
+//<iframe width="425" height="350" src="https://www.openstreetmap.org/export/embed?bbox=-312.89062536556895%2C-66.37275499871778%2C102.65624963443108%2C81.51827187791635&amp;layer=mapnik" style="border: 1px solid black"></iframe><br/><small><a href="https://www.openstreetmap.org/#map=2/28.5/-105.1">View Larger Map</a></small>
+function prosessLocation(lat, lon) {
+
+}
+function initMap(lat, lon, zoom) {
+    var map = L.map('map').setView({lon, lat}, zoom);
+    
+    L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
+        maxZoom: 19,
+        attribution: '&copy; <a href="https://openstreetmap.org/copyright">OpenStreetMap contributors</a>'
+    }).addTo(map);
+
+    L.control.scale({imperial: true, metric: true}).addTo(map)
+
+      
+    marker = new L.Marker([lat, lon], {draggable: true, autoPan: true}).addTo(map);
+
+    map.on('click', function(e) {
+        marker.setLatLng(e.latlng);
+    });
+    document.getElementById('confirmLocationButton').addEventListener('click', function() {
+        var latlng = marker.getLatLng();
+        map.remove();
+        document.getElementById('map').remove();
+        
+        document.getElementById('confirmLocationButton').remove();
+        prosessLocation(latlng.lat, latlng.lng);
+    });
+}
+function initDefaultMap() {
+    initMap(38.75, -76.29, 2);
+}
+if (navigator.geolocation) {
+    navigator.geolocation.getCurrentPosition(function(position) {
+        initMap(position.coords.latitude, position.coords.longitude, 18);
+    }, function(error) {
+        initDefaultMap();
+    });
+} else {
+    initDefaultMap();
+}
