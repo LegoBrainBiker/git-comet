@@ -2,13 +2,17 @@
 async function processLocation(lat, lon) {
     document.getElementById('coordinates').innerText = `Latitude: ${lat}, Longitude: ${lon}`;
 
+    document.getElementById('coordinates').innerText = `Latitude: ${lat}, Longitude: ${lon}`;
     const date = new Date();
 
     const dateString = `${date.getFullYear()}${date.getMonth() + 1}${date.getDate()-2}`;//use 2 days ago's date to because there's no more recent data
     const apiResponce = JSON.parse(await (await fetch(`https://power.larc.nasa.gov/api/temporal/daily/point?start=${dateString}&end=${dateString}&latitude=${lat}&longitude=${lon}&community=ag&parameters=T2M%2CGWETPROF%2CGWETTOP%2CEVLAND%2CIMERG_PRECTOT%2CPRMC%2CTSOIL1%2CTSOIL2%2CTSOIL3%2CGDD4_4%2CGDD7_2&format=json&units=imperial&header=true&time-standard=utc`)).text());
     const [T2M, GWETPROF, GWETTOP, EVLAND, IMERG_PRECTOT, PRMC, TSOIL1, TSOIL2, TSOIL3, GDD4_4, GDD7_2] =Object.values(apiResponce.properties.parameter).map((v) => v[dateString]).map(v => v == -999 ? undefined : v);
     console.log(`T2M: ${T2M}, GWETPROF: ${GWETPROF}, GWETTOP: ${GWETTOP}, EVLAND: ${EVLAND}, IMERG_PRECTOT: ${IMERG_PRECTOT}, PRMC: ${PRMC}, TSOIL1: ${TSOIL1}, TSOIL2: ${TSOIL2}, TSOIL3: ${TSOIL3}, GDD4_4: ${GDD4_4}, GDD7_2: ${GDD7_2}`);
+    document.getElementById('output').innerText = `T2M: ${T2M}, GWETPROF: ${GWETPROF}, GWETTOP: ${GWETTOP}, EVLAND: ${EVLAND}, IMERG_PRECTOT: ${IMERG_PRECTOT}, PRMC: ${PRMC}, TSOIL1: ${TSOIL1}, TSOIL2: ${TSOIL2}, TSOIL3: ${TSOIL3}, GDD4_4: ${GDD4_4}, GDD7_2: ${GDD7_2}`;
+    document.getElementById('coordinates').innerText = `Latitude: ${lat}, Longitude: ${lon}`;
 }
+
 function initMap(lat, lon, zoom) {
     var map = L.map('map').setView({lon, lat}, zoom);
     
@@ -35,11 +39,17 @@ function initMap(lat, lon, zoom) {
         window.location.search = `?lat=${latlng.lat}&lon=${latlng.lng}`;
         processLocation(latlng.lat, latlng.lng);
 
+
     });
 }
 function initDefaultMap() {
     initMap(38.75, -76.29, 2);
 }
+
+function calcSoilHealth(){
+
+}
+
 const urlParams = new URLSearchParams(window.location.search);
 if (urlParams.has('lat') && urlParams.has('lon')) {
     const lat = parseFloat(urlParams.get('lat'));
