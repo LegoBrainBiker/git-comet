@@ -11,6 +11,7 @@ async function processLocation(lat, lon) {
     console.log(`T2M: ${T2M}, GWETPROF: ${GWETPROF}, GWETTOP: ${GWETTOP}, EVLAND: ${EVLAND}, IMERG_PRECTOT: ${IMERG_PRECTOT}, PRMC: ${PRMC}, TSOIL1: ${TSOIL1}, TSOIL2: ${TSOIL2}, TSOIL3: ${TSOIL3}, GDD4_4: ${GDD4_4}, GDD7_2: ${GDD7_2}`);
     document.getElementById('output').innerText = `T2M: ${T2M}, GWETPROF: ${GWETPROF}, GWETTOP: ${GWETTOP}, EVLAND: ${EVLAND}, IMERG_PRECTOT: ${IMERG_PRECTOT}, PRMC: ${PRMC}, TSOIL1: ${TSOIL1}, TSOIL2: ${TSOIL2}, TSOIL3: ${TSOIL3}, GDD4_4: ${GDD4_4}, GDD7_2: ${GDD7_2}`;
     document.getElementById('coordinates').innerText = `Latitude: ${lat}, Longitude: ${lon}`;
+    calcSoilHealth();
 }
 
 function initMap(lat, lon, zoom) {
@@ -46,7 +47,13 @@ function initDefaultMap() {
 }
 
 function calcSoilHealth(){
+    heatlth = 0;
+    const w1 = 0.3;
+    const w2 = 0.7;
+    health = w1 * (GWETTOP) + w2 * (GWETPROF);
 
+
+    document.getElementById('soilHealth').innerText = `Soil Health: ${health}`;
 }
 
 if (navigator.geolocation) {
