@@ -1,13 +1,17 @@
 //<iframe width="425" height="350" src="https://www.openstreetmap.org/export/embed?bbox=-312.89062536556895%2C-66.37275499871778%2C102.65624963443108%2C81.51827187791635&amp;layer=mapnik" style="border: 1px solid black"></iframe><br/><small><a href="https://www.openstreetmap.org/#map=2/28.5/-105.1">View Larger Map</a></small>
-async function prosessLocation(lat, lon) {
+async function processLocation(lat, lon) {
     console.log("Location confirmed: " + lat + ", " + lon);
+    document.getElementById('coordinates').innerText = `Latitude: ${lat}, Longitude: ${lon}`;
     const date = new Date();
 
     const dateString = `${date.getFullYear()}${date.getMonth() + 1}${date.getDate()-2}`;//use 2 days ago's date to because there's no more recent data
     const apiResponce = JSON.parse(await (await fetch(`https://power.larc.nasa.gov/api/temporal/daily/point?start=${dateString}&end=${dateString}&latitude=${lat}&longitude=${lon}&community=ag&parameters=T2M%2CGWETPROF%2CGWETTOP%2CEVLAND%2CIMERG_PRECTOT%2CPRMC%2CTSOIL1%2CTSOIL2%2CTSOIL3%2CGDD4_4%2CGDD7_2&format=json&units=imperial&header=true&time-standard=utc`)).text());
     const [T2M, GWETPROF, GWETTOP, EVLAND, IMERG_PRECTOT, PRMC, TSOIL1, TSOIL2, TSOIL3, GDD4_4, GDD7_2] =Object.values(apiResponce.properties.parameter).map((v) => v[dateString]).map(v => v == -999 ? undefined : v);
     console.log(`T2M: ${T2M}, GWETPROF: ${GWETPROF}, GWETTOP: ${GWETTOP}, EVLAND: ${EVLAND}, IMERG_PRECTOT: ${IMERG_PRECTOT}, PRMC: ${PRMC}, TSOIL1: ${TSOIL1}, TSOIL2: ${TSOIL2}, TSOIL3: ${TSOIL3}, GDD4_4: ${GDD4_4}, GDD7_2: ${GDD7_2}`);
+    document.getElementById('output').innerText = `T2M: ${T2M}, GWETPROF: ${GWETPROF}, GWETTOP: ${GWETTOP}, EVLAND: ${EVLAND}, IMERG_PRECTOT: ${IMERG_PRECTOT}, PRMC: ${PRMC}, TSOIL1: ${TSOIL1}, TSOIL2: ${TSOIL2}, TSOIL3: ${TSOIL3}, GDD4_4: ${GDD4_4}, GDD7_2: ${GDD7_2}`;
+    document.getElementById('coordinates').innerText = `Latitude: ${lat}, Longitude: ${lon}`;
 }
+
 function initMap(lat, lon, zoom) {
     var map = L.map('map').setView({lon, lat}, zoom);
     
@@ -33,14 +37,17 @@ function initMap(lat, lon, zoom) {
         document.getElementById('confirmLocationButton').remove();
         processLocation(latlng.lat, latlng.lng);
 
+
     });
 }
 function initDefaultMap() {
     initMap(38.75, -76.29, 2);
 }
-function processLocation(lat, lon) {
-    document.getElementById('coordinates').innerText = `Latitude: ${lat}, Longitude: ${lon}`;
+
+function calcSoilHealth(){
+
 }
+
 if (navigator.geolocation) {
     navigator.geolocation.getCurrentPosition(function(position) {
         initMap(position.coords.latitude, position.coords.longitude, 18);
