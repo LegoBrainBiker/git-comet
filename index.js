@@ -26,8 +26,16 @@ function initMap(lat, lon, zoom) {
       
     marker = new L.Marker([lat, lon], {draggable: true, autoPan: true}).addTo(map);
 
+    function updateCoordinates(latlng) {
+        
+        marker.setLatLng([Math.min(Math.max(latlng.lat, -90), 90), Math.min(Math.max(latlng.lng, -180), 180)]);
+    }
     map.on('click', function(e) {
-        marker.setLatLng(e.latlng);
+        updateCoordinates(e.latlng);
+    });
+    marker.on('dragend', function(e) {
+        var latlng = marker.getLatLng();
+        updateCoordinates(latlng)
     });
     document.getElementById('confirmLocationButton').addEventListener('click', function() {
         var latlng = marker.getLatLng();
