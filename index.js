@@ -32,6 +32,7 @@ function initMap(lat, lon, zoom) {
         document.getElementById('map').remove();
         document.getElementById('locationHeading').remove();
         document.getElementById('confirmLocationButton').remove();
+        window.location.search = `?lat=${latlng.lat}&lon=${latlng.lng}`;
         processLocation(latlng.lat, latlng.lng);
 
     });
@@ -39,7 +40,15 @@ function initMap(lat, lon, zoom) {
 function initDefaultMap() {
     initMap(38.75, -76.29, 2);
 }
-if (navigator.geolocation) {
+const urlParams = new URLSearchParams(window.location.search);
+if (urlParams.has('lat') && urlParams.has('lon')) {
+    const lat = parseFloat(urlParams.get('lat'));
+    const lon = parseFloat(urlParams.get('lon'));
+    document.getElementById('map').remove();
+    document.getElementById('locationHeading').remove();
+    document.getElementById('confirmLocationButton').remove();
+    processLocation(lat, lon);
+} else if (navigator.geolocation) {
     navigator.geolocation.getCurrentPosition(function(position) {
         initMap(position.coords.latitude, position.coords.longitude, 18);
     }, function(error) {
