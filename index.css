@@ -22,11 +22,12 @@ button:not(:hover) {
     height: calc(100% - 37px);
 }
 * {
-    color: #eee;
+    color: black;
 }
 h1 {
     font-family: 'Times New Roman', serif;
     text-align: center;
+    color: white;
 }
 @keyframes spin {
     from { rotate: 0deg; }
