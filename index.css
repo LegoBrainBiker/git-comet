@@ -11,10 +11,12 @@ button {
     cursor: pointer;
     background-color: #444;
     border: 5px solid #666;
+    color: white;
 }
 button:not(:hover) {
     background-color: #555;
     border: 5px solid #777;
+    color: white;
 }
 #map {
     /* configure the size of the map */
