@@ -2,6 +2,8 @@
 async function processLocation(lat, lon) {
     console.log("Location confirmed: " + lat + ", " + lon);
     document.getElementById('coordinates').innerText = `Latitude: ${lat}, Longitude: ${lon}`;
+
+    document.getElementById('coordinates').innerText = `Latitude: ${lat}, Longitude: ${lon}`;
     const date = new Date();
 
     const dateString = `${date.getFullYear()}${date.getMonth() + 1}${date.getDate()-2}`;//use 2 days ago's date to because there's no more recent data
