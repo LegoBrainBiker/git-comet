@@ -1,4 +1,3 @@
-//<iframe width="425" height="350" src="https://www.openstreetmap.org/export/embed?bbox=-312.89062536556895%2C-66.37275499871778%2C102.65624963443108%2C81.51827187791635&amp;layer=mapnik" style="border: 1px solid black"></iframe><br/><small><a href="https://www.openstreetmap.org/#map=2/28.5/-105.1">View Larger Map</a></small>
 async function processLocation(lat, lon) {
     document.getElementById('coordinates').innerText = `Latitude: ${lat}, Longitude: ${lon}`;
 
@@ -16,7 +15,7 @@ async function processLocation(lat, lon) {
 
 function initMap(lat, lon, zoom) {
     var map = L.map('map').setView({lon, lat}, zoom);
-    
+    document.getElementById('map').children[0].remove();
     L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
         noWrap: true,
         maxZoom: 19,
@@ -37,6 +36,7 @@ function initMap(lat, lon, zoom) {
         document.getElementById('map').remove();
         document.getElementById('locationHeading').remove();
         document.getElementById('confirmLocationButton').remove();
+        window.location.search = `?lat=${latlng.lat}&lon=${latlng.lng}`;
         processLocation(latlng.lat, latlng.lng);
 
 
@@ -56,7 +56,15 @@ function calcSoilHealth(){
     document.getElementById('soilHealth').innerText = `Soil Health: ${health}`;
 }
 
-if (navigator.geolocation) {
+const urlParams = new URLSearchParams(window.location.search);
+if (urlParams.has('lat') && urlParams.has('lon')) {
+    const lat = parseFloat(urlParams.get('lat'));
+    const lon = parseFloat(urlParams.get('lon'));
+    document.getElementById('map').remove();
+    document.getElementById('locationHeading').remove();
+    document.getElementById('confirmLocationButton').remove();
+    processLocation(lat, lon);
+} else if (navigator.geolocation) {
     navigator.geolocation.getCurrentPosition(function(position) {
         initMap(position.coords.latitude, position.coords.longitude, 18);
     }, function(error) {
