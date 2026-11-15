@@ -40,7 +40,6 @@ button:not(:hover) {
 }
 #measurements h2, #recommendations h2 {
     margin: 0 0 8px;
-    font-size: 1.15rem;
 }
 #measurements p {
     margin: 8px 0;
