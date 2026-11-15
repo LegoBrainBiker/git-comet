@@ -62,6 +62,9 @@ function calcSoilHealth(par1, par2){
     document.getElementById('soilHealth').innerText = `Soil Health: ${health}`;
 }
 
+
+
+
 const urlParams = new URLSearchParams(window.location.search);
 if (urlParams.has('lat') && urlParams.has('lon')) {
     const lat = parseFloat(urlParams.get('lat'));
