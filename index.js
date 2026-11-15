@@ -11,6 +11,7 @@ async function processLocation(lat, lon) {
     document.getElementById('output').innerText = `T2M: ${T2M}, GWETPROF: ${GWETPROF}, GWETTOP: ${GWETTOP}, EVLAND: ${EVLAND}, IMERG_PRECTOT: ${IMERG_PRECTOT}, PRMC: ${PRMC}, TSOIL1: ${TSOIL1}, TSOIL2: ${TSOIL2}, TSOIL3: ${TSOIL3}, GDD4_4: ${GDD4_4}, GDD7_2: ${GDD7_2}`;
     document.getElementById('coordinates').innerText = `Latitude: ${lat}, Longitude: ${lon}`;
     calcSoilHealth(GWETTOP, GWETPROF);
+    avgSoilTemp(TSOIL1, TSOIL2, TSOIL3);
 }
 
 function initMap(lat, lon, zoom) {
@@ -60,6 +61,11 @@ function calcSoilHealth(par1, par2){
         health = "Critical stress, risk of soil compactions and crop wilting";
     }
     document.getElementById('soilHealth').innerText = `Soil Health: ${health}`;
+}
+
+function avgSoilTemp(par1, par2, par3){
+    avgTemp = (((par1 + par2 + par3) / 3)).toFixed(2);
+    document.getElementById('avgSoilTemp').innerText = `Average Soil Temperature(0.018-0.6799m deep): ${avgTemp} °F`;
 }
 
 
