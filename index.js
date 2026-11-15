@@ -50,6 +50,17 @@ function initMap(lat, lon, zoom) {
 
 
     });
+    document.getElementById('confirmLocationButton').addEventListener('drag', function() {
+        var latlng = marker.getLatLng();
+        map.remove();
+        document.getElementById('map').remove();
+        document.getElementById('locationHeading').remove();
+        document.getElementById('confirmLocationButton').remove();
+        window.location.search = `?lat=${latlng.lat}&lon=${latlng.lng}`;
+        processLocation(latlng.lat, latlng.lng);
+
+
+    });
 }
 function initDefaultMap() {
     initMap(38.75, -76.29, 2);
