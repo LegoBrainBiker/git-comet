@@ -19,7 +19,7 @@ async function processLocation(lat, lon) {
     const averageTemperature = avgSoilTemp(TSOIL1, TSOIL2, TSOIL3);
     renderRecommendations(data, soilHealth, averageTemperature);
     document.getElementById('dashboard').style.display = 'block';
-    document.getElementById('recommendationIntro').innerText = `Based on NASA's ${dateString} daily record. Confirm conditions in the field before acting.`;
+    document.getElementById('recommendationIntro').innerText = `Based on recent NASA records. Confirm conditions in the field before acting.`;
 }
 
 function renderRecommendations(data, soilHealth, averageTemperature) {
