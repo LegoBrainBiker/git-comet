@@ -23,6 +23,60 @@ button:not(:hover) {
     width: 100%;
     height: calc(100% - 37px);
 }
+#dashboard {
+    position: absolute;
+    z-index: 950;
+    top: 55px;
+    max-height: calc(100% - 75px);
+    overflow-y: auto;
+    color: #fff;
+    font-family: Arial, sans-serif;
+}
+#coordinates, #measurements, #recommendations {
+    margin: 0 0 12px;
+    padding: 12px 16px;
+    background: rgba(34, 34, 34, .92);
+    border-radius: 6px;
+}
+#coordinates {
+    font-size: .9rem;
+}
+#measurements h2, #recommendations h2 {
+    margin: 0 0 8px;
+    font-size: 1.15rem;
+}
+#measurements p {
+    margin: 8px 0;
+    line-height: 1.4;
+}
+#recommendationIntro {
+    margin: 0 0 10px;
+    color: #ddd;
+    font-size: .9rem;
+}
+#recommendationList {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+#recommendationList li {
+    margin: 8px 0;
+    padding: 10px;
+    border-left: 4px solid #bbb;
+    background: rgba(255, 255, 255, .08);
+    line-height: 1.4;
+}
+#recommendationList li.good { border-color: #63c174; }
+#recommendationList li.watch { border-color: #e4b54f; }
+#recommendationList li.urgent { border-color: #e56b6f; }
+@media (max-width: 700px) {
+    #dashboard {
+        top: 52px;
+        right: 12px;
+        width: calc(100% - 24px);
+        max-height: 48%;
+    }
+}
 h1 {
     font-family: 'Times New Roman', serif;
     text-align: center;

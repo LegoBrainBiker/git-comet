@@ -45,10 +45,20 @@
 
             </div>
         </div>
-        <p id="coordinates" style="position:absolute; bottom: 580px; left: 780px; z-index: 950; color: white;"></p>
-        <p id="output" style="position:absolute; bottom: 440px; left: 780px; z-index: 950; color: white;"></p>
-        <p id="soilHealth" style="position:absolute; bottom: 385px; left: 780px; z-index: 950; color: white;"></p>
-        <p id="avgSoilTemp" style="position:absolute; bottom: 350px; left: 780px; z-index: 950; color: white;"></p>
+        <main id="dashboard" aria-live="polite">
+            <p id="coordinates"></p>
+            <section id="measurements">
+                <h2>Field conditions</h2>
+                <p id="output">Loading field data...</p>
+                <p id="soilHealth"></p>
+                <p id="avgSoilTemp"></p>
+            </section>
+            <section id="recommendations">
+                <h2>Farm decisions</h2>
+                <p id="recommendationIntro">Recommendations will appear after the field is selected.</p>
+                <ul id="recommendationList"></ul>
+            </section>
+        </main>
         <script src="./index.js"></script>
     </body>
 </html>
