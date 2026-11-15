@@ -18,6 +18,19 @@ button:not(:hover) {
     border: 5px solid #777;
     color: white;
 }
+#confirmLocationButton {
+    position: absolute;
+    bottom: 10px;
+    right: 10px;
+    z-index: 1000;
+}
+#confirmLocationButton.full-width {
+    left: 0;
+    right: auto;
+    width: 100%;
+    min-height: 23%;
+    box-sizing: border-box;
+}
 #map {
     /* configure the size of the map */
     width: 100%;
@@ -27,6 +40,7 @@ button:not(:hover) {
     position: absolute;
     z-index: 950;
     top: 55px;
+    max-height: calc(100% - 75px);
     overflow-y: auto;
     color: #fff;
     font-family: Arial, sans-serif;

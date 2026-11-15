@@ -37,6 +37,16 @@ async function processLocation(lat, lon) {
         : `Based on NASA's ${dateString} record. The weather forecast is unavailable; confirm conditions before acting.`;
 }
 
+function updateConfirmButtonLayout() {
+    const button = document.getElementById('confirmLocationButton');
+    if (button) {
+        button.classList.toggle('full-width', window.innerHeight > window.innerWidth);
+    }
+}
+
+window.addEventListener('resize', updateConfirmButtonLayout);
+updateConfirmButtonLayout();
+
 function renderRecommendations(data, soilHealth, averageTemperature, forecast) {
     const recommendations = [];
     const add = (level, title, text) => recommendations.push(`<li class="${level}"><strong>${title}:</strong> ${text}</li>`);
