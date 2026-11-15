@@ -27,7 +27,6 @@ button:not(:hover) {
     position: absolute;
     z-index: 950;
     top: 55px;
-    max-height: calc(100% - 75px);
     overflow-y: auto;
     color: #fff;
     font-family: Arial, sans-serif;
