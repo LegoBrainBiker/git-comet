@@ -1,6 +1,4 @@
 async function processLocation(lat, lon) {
-    document.getElementById('coordinates').innerText = `Latitude: ${lat}, Longitude: ${lon}`;
-
     const date = new Date();
     date.setDate(date.getDate() - 2);
     const dateString = `${date.getFullYear()}${String(date.getMonth() + 1).padStart(2, '0')}${String(date.getDate()).padStart(2, '0')}`;
@@ -20,6 +18,7 @@ async function processLocation(lat, lon) {
     const soilHealth = calcSoilHealth(GWETTOP, GWETPROF);
     const averageTemperature = avgSoilTemp(TSOIL1, TSOIL2, TSOIL3);
     renderRecommendations(data, soilHealth, averageTemperature);
+    document.getElementById('dashboard').style.display = 'block';
     document.getElementById('recommendationIntro').innerText = `Based on NASA's ${dateString} daily record. Confirm conditions in the field before acting.`;
 }
 

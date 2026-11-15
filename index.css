@@ -32,14 +32,11 @@ button:not(:hover) {
     color: #fff;
     font-family: Arial, sans-serif;
 }
-#coordinates, #measurements, #recommendations {
+#measurements, #recommendations {
     margin: 0 0 12px;
     padding: 12px 16px;
     background: rgba(34, 34, 34, .92);
     border-radius: 6px;
-}
-#coordinates {
-    font-size: .9rem;
 }
 #measurements h2, #recommendations h2 {
     margin: 0 0 8px;
